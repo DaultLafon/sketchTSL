@@ -1,0 +1,60 @@
+import * as THREE from "three/webgpu";
+import Experience from "../Experience";
+
+import { texture, uv, vec4 } from 'three/tsl';
+import { mx_noise_float, color, cross, dot, float, transformNormalToView, positionLocal, sign, step, Fn, uniform, varying, vec2, vec3, Loop } from 'three/tsl';
+import { Wireframe } from "three/examples/jsm/Addons.js";
+
+export default class World {
+
+    constructor() {
+        this.experience = new Experience()
+        this.scene = this.experience.scene
+        this.ressources = this.experience.ressources
+        this.time = this.experience.time
+
+        // A generer apres la gestion du loading manager
+        this.setPlane()
+
+
+
+
+
+
+
+
+
+        this.update()
+
+    }
+
+    getMaterial() {
+        const mat = new THREE.NodeMaterial()
+        const uvNode = Fn(() => {
+            return vec4(uv(), 0., 1.)
+        })
+        mat.colorNode = uvNode()
+        return mat
+    }
+
+
+    setPlane() {
+        // const tslMaterial = new THREE.MeshBasicMaterial({ color: 'red' })
+        //
+        this.mat = this.getMaterial()
+        this.plane = new THREE.Mesh(
+            new THREE.PlaneGeometry(1, 1),
+            this.mat
+        )
+        // this.plane.scale.set(this.experience.sizes.width, this.experience.sizes.height)
+        this.scene.add(this.plane)
+    }
+
+
+
+    update() {
+
+
+    }
+
+}

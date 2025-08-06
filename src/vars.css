@@ -1,0 +1,24 @@
+/* grands */
+@media (min-aspect-ratio: 1440/910) {
+  :root {
+    --vr: calc(100vh / 910);
+  }
+}
+/* petits écrans */
+@media (max-aspect-ratio: 1440/910) {
+  :root {
+    --vr: calc(100vw / 910);
+  }
+}
+/* Phone paysage */
+@media (max-width: 800px) and (min-aspect-ratio: 379/766) {
+  :root {
+    --vr: calc(100vh / 766);
+  }
+}
+/* Phone portrait */
+@media (max-width: 800px) and (max-aspect-ratio: 379/766) {
+  :root {
+    --vr: calc(100vw / 379);
+  }
+}
