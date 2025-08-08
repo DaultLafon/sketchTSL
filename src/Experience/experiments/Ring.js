@@ -1,6 +1,6 @@
 import * as THREE from "three/webgpu";
 import Experience from '../Experience.js'
-import { mx_noise_float, color, cross, dot, float, abs, mod, smoothstep, positionGeometry, max, min, transformNormalToView, positionLocal, timerLocal, cos, positionWorld, clamp, mul, sin, add, sign, step, Fn, uniform, varying, vec2, vec3, Loop, pow, texture, uv, vec4, transmission, emissive, metalness } from 'three/tsl';
+import { mx_noise_float, color, cross, dot, float, distance, abs, mod, smoothstep, positionGeometry, max, min, transformNormalToView, positionLocal, timerLocal, cos, positionWorld, clamp, mul, sin, add, sign, step, Fn, uniform, varying, vec2, vec3, Loop, pow, texture, uv, vec4, transmission, emissive, metalness } from 'three/tsl';
 
 export default class Ring {
     constructor() {
@@ -16,8 +16,8 @@ export default class Ring {
 
     }
     setLight() {
-        this.ambient = new THREE.AmbientLight('#ffffff', 0.2);
-        this.dir = new THREE.DirectionalLight('#ffffff', 1);
+        this.ambient = new THREE.AmbientLight('#1e00ff', 2);
+        this.dir = new THREE.DirectionalLight('#ffffff', 20);
 
         this.dir.position.set(3, 3, -3);
         this.scene.add(this.ambient, this.dir);
@@ -120,17 +120,20 @@ export default class Ring {
         return geometry;
     }
     getMaterial(index, time) {
+
         const t = time.mul(-5);
         const pi = float(Math.PI); // ok ici
 
         const mat = new THREE.MeshStandardNodeMaterial({
-            color: '#ffffff',
-            roughness: 1,
-            metalness: 0,
+            // color: '#743925',
+            color: '#443b68',
+            // color: '#683b3b',
+            roughness: 0.4,
+            // metalness: 0.8,
+            metalness: 1,
             side: THREE.DoubleSide,
         });
 
-        const emissiveColor = color('orange');
         const i = index;
 
         const x = t.add(i.mul(0.3));
@@ -147,10 +150,14 @@ export default class Ring {
 
         const value = a.add(b).add(c.mul(-2)).mul(0.3);
 
-        const z = sin(x).mul(float(0.8)).mul(value); // ✔️ z est un Node
+        const z = sin(x).mul(float(0.8)).mul(value);
 
         const modifiedPosition = positionGeometry.add(vec3(0, 0, z));
         mat.positionNode = modifiedPosition;
+        // mat.metalnessNode = min(distance(modifiedPosition, vec3(0, 0, 0)), float(1)).mul(0.6);
+        mat.roughnessNode = max(z.sub(0.2).mul(-1), 0.2)
+        mat.colorNode = color(mat.color.getHex()).mul(max(z.mul(-10), 0).add(0.8)).mul(vec3(1, 1, 1))
+
 
         // Optionnel : effets visuels
         // mat.emissiveNode = emissiveColor.mul(z.sub(2).mul(-1));
@@ -162,7 +169,7 @@ export default class Ring {
 
 
     setMesh() {
-        const count = 20;
+        const count = 30;
         this.meshes = [];
         this.tNode = uniform(0); // tNode global, mis à jour chaque frame
         this.group = new THREE.Group();
@@ -189,10 +196,16 @@ export default class Ring {
 
         const t = this.time.elapsed * 0.001
         this.tNode.value = t;
-        // this.group.rotation.set(
-        //     Math.cos(t * 0.5) * 0.5,
-        //     0,
-        //     Math.sin(t * 0.5) * 0.5
-        // )
+        this.group.rotation.set(
+            Math.cos(3) * 0.3,
+            0,
+            Math.sin(3) * 0.3
+        )
+        this.experience.camera.instance.position.set(
+            Math.cos(3) * 1.5,
+            1,
+            Math.sin(3) * 1.5
+        )
+        this.experience.camera.instance.lookAt(new THREE.Vector3(this.group.position.x, this.group.position.y + 0.2, this.group.position.z));
     }
 }
