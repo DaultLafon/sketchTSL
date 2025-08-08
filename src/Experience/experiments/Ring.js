@@ -121,7 +121,7 @@ export default class Ring {
     }
     getMaterial(index, time) {
 
-        const t = time.mul(-5);
+        const t = time.mul(-6);
         const pi = float(Math.PI); // ok ici
 
         const mat = new THREE.MeshStandardNodeMaterial({
