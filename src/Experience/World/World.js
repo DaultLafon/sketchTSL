@@ -1,5 +1,6 @@
 import * as THREE from "three/webgpu";
 import Experience from "../Experience";
+import Ring2 from "../experiments/Ring2.js";
 import Ring from "../experiments/Ring.js";
 
 import { mx_noise_float, color, cross, dot, float, transformNormalToView, positionLocal, sign, step, Fn, uniform, varying, vec2, vec3, Loop, pow, texture, uv, vec4 } from 'three/tsl';
@@ -16,7 +17,8 @@ export default class World {
         // A generer apres la gestion du loading manager
         // this.setPlane()
 
-        this.ring = new Ring()
+        // this.ring = new Ring()
+        this.ring = new Ring2()
 
 
 
@@ -56,6 +58,9 @@ export default class World {
 
     update() {
         if (this.ring) {
+            this.ring.update()
+        }
+        if (this.ring2) {
             this.ring.update()
         }
 
