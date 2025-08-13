@@ -14,7 +14,7 @@ export default class Camera {
         this.canvas = this.experience.canvas
         this.animationDuration = 1000
         this.setInstance()
-        // this.setOrbitControls()
+        this.setOrbitControls()
 
     }
 
@@ -37,7 +37,7 @@ export default class Camera {
         // )
 
 
-        this.instance.position.set(-3.5, 0, -3.5)
+        this.instance.position.set(0, 0, -1.5)
 
         this.scene.add(this.instance)
 
