@@ -9,6 +9,7 @@ export default class Ring2 {
         this.scene = this.experience.scene
         this.ressources = this.experience.ressources
         this.time = this.experience.time
+        this.experience.renderer.instance.setClearColor('#a298c7')
 
         this.wave = true
         this.setLight()
