@@ -32,28 +32,19 @@ export default class World {
         this.update()
 
     }
-
     getMaterial() {
         const mat = new THREE.NodeMaterial()
-        // gamma
-        const sRGGBTransferOETF = Fn(([c]) => {
-            const a = c.pow(0.41666).mul(1.055).sub(0.055)
-            const b = c.mul(12.92)
-            const factor = c.lessThanEqual(0.0031308)
-            return mix(a, b, factor)
-        })
-        // final col
+
         const finalColorNode = Fn(() => {
-
             let col = vec3(uv(), 0.5)
-
+            col = pow(col, 1.4)
             return vec4(col, 1.)
         })
 
-        // mat.colorNode = pow(finalColorNode(), 2.)
-        mat.outputNode = finalColorNode()
+        mat.colorNode = finalColorNode()
         return mat
     }
+
 
     setPlane() {
         //
