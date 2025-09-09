@@ -12,7 +12,6 @@ export default class Camera {
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
-        this.animationDuration = 1000
         this.setInstance()
         this.setOrbitControls()
 
@@ -58,7 +57,6 @@ export default class Camera {
     }
     update() {
         this.controls?.update()
-        this.instance.lookAt(new THREE.Vector3(0, 0, 0))
 
     }
 
