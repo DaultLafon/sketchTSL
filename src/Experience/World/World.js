@@ -37,7 +37,7 @@ export default class World {
 
         const finalColorNode = Fn(() => {
             let col = vec3(uv(), 0.5)
-            col = pow(col, 1.4)
+            col = pow(col, 1.8)
             return vec4(col, 1.)
         })
 
