@@ -3,6 +3,7 @@ import Experience from "../Experience";
 import Ring2 from "../experiments/Ring2.js";
 import Ring from "../experiments/Ring.js";
 import Ring3 from "../experiments/Ring3.js";
+import samDelatour from "../experiments/samDelatour.js";
 
 import { mx_noise_float, screenUV, color, cross, mix, lessThanEqual, dot, float, transformNormalToView, positionLocal, sign, step, Fn, uniform, varying, vec2, vec3, Loop, pow, texture, uv, vec4 } from 'three/tsl';
 
@@ -16,10 +17,11 @@ export default class World {
         this.time = this.experience.time
 
         // A generer apres la gestion du loading manager
-        this.setPlane()
+        // this.setPlane()
 
         // this.ring = new Ring()
         // this.ring = new Ring3()
+        this.delatour = new samDelatour()
 
 
 
