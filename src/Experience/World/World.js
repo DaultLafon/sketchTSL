@@ -20,8 +20,8 @@ export default class World {
         // this.setPlane()
 
         // this.ring = new Ring()
-        // this.ring = new Ring3()
-        this.delatour = new samDelatour()
+        this.ring = new Ring3()
+        // this.delatour = new samDelatour()
 
 
 
