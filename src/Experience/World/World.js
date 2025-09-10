@@ -73,6 +73,9 @@ export default class World {
         if (this.ring3) {
             this.ring.update()
         }
+        if (this.delatour) {
+            this.delatour.update()
+        }
 
 
     }
