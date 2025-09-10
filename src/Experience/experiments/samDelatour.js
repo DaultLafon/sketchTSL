@@ -23,12 +23,12 @@ export default class samDelatour {
     }
 
     setBase() {
+        console.log('hello sam');
 
 
     }
 
     update() {
-        this.time.value = this.experience.time.elapsed * 0.001
 
     }
 }
